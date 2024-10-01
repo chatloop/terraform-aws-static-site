@@ -1,0 +1,80 @@
+repos:
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v9.18.0
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+        additional_dependencies: ['@commitlint/config-conventional']
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3.0.3
+    hooks:
+      - id: editorconfig-checker
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.3
+    hooks:
+      - id: actionlint
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.42.0
+    hooks:
+      - id: markdownlint
+  - repo: local
+    hooks:
+      - id: generate-terraform-providers
+        name: generate-terraform-providers
+        require_serial: true
+        entry: scripts/generate-providers.sh
+        language: golang
+        files: \.tf(vars)?$
+        pass_filenames: false
+        additional_dependencies:
+          - github.com/hashicorp/terraform-config-inspect@v0.0.0-20231204233900-a34142ec2a72
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.96.1
+    hooks:
+      - id: terraform_validate
+        args:
+          - --hook-config=--retry-once-with-cleanup=true
+      - id: terraform_checkov
+        args:
+          - --args=--compact
+          - --args=--config-file __GIT_WORKING_DIR__/.checkov.yaml
+          - --args=--framework=terraform
+          - --args=--quiet
+      - id: terraform_docs
+        args: [--args=--output-file=readme.md]
+      - id: terraform_fmt
+      - id: terraform_tflint
+        args: [--args=--config=__GIT_WORKING_DIR__/.tflint.hcl, --args=--call-module-type=all]
+      - id: terraform_trivy
+        args:
+          - >
+            --args=--ignorefile=__GIT_WORKING_DIR__/.trivyignore
+            --skip-dirs="**/.terraform"
+            --tf-exclude-downloaded-modules
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-xml
+      - id: check-yaml
+        args: [--unsafe]
+      - id: destroyed-symlinks
+      - id: detect-aws-credentials
+        args: [--allow-missing-credentials]
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: file-contents-sorter
+      - id: forbid-new-submodules
+      - id: mixed-line-ending
+      - id: pretty-format-json
+        args: [--autofix, --no-sort-keys]
+      - id: trailing-whitespace
