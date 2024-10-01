@@ -1,0 +1,25 @@
+version: 2
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    groups:
+      gha:
+        patterns:
+          - '*'
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: Europe/London
+  - package-ecosystem: terraform
+    directory: /
+    groups:
+      terraform:
+        patterns:
+          - '*'
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: Europe/London
