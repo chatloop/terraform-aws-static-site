@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/chatloop/terraform-aws-static-site/compare/v0.1.0...v0.2.0) (2024-10-02)
+
+
+### Features
+
+* added configurable default_root_object ([#4](https://github.com/chatloop/terraform-aws-static-site/issues/4)) ([c08a0f8](https://github.com/chatloop/terraform-aws-static-site/commit/c08a0f8fe61c854fc1e62a9bdcdd7e07946e185f))
+
 ## 0.1.0 (2024-10-01)
 
 
