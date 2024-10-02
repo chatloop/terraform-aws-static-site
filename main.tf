@@ -57,11 +57,12 @@ module "authorizer" {
 module "cloudfront" {
   source = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=a0f0506106a4c8815c1c32596e327763acbef2c2" # v3.4.0
 
-  aliases         = [var.domain_name]
-  comment         = var.comment
-  http_version    = "http2and3"
-  is_ipv6_enabled = true
-  price_class     = "PriceClass_100"
+  aliases             = [var.domain_name]
+  comment             = var.comment
+  default_root_object = var.default_root_object
+  http_version        = "http2and3"
+  is_ipv6_enabled     = true
+  price_class         = "PriceClass_100"
 
   # The OAC is not used when using website endpoints as these can't be restricted
   create_origin_access_control = local.use_website_endpoint == false

@@ -59,6 +59,11 @@ variable "default_cache_behavior" {
   default = {}
 }
 
+variable "default_root_object" {
+  type    = string
+  default = "index.html"
+}
+
 variable "domain_name" {
   type = string
 }
