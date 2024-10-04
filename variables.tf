@@ -53,6 +53,7 @@ variable "default_cache_behavior" {
     response_headers_policy_id   = optional(string)
     response_headers_policy_name = optional(string, "Managed-SecurityHeadersPolicy")
     target_origin_id             = optional(string)
+    use_authorizer               = optional(bool, true)
     viewer_protocol_policy       = optional(string, "redirect-to-https")
   })
 
@@ -85,6 +86,7 @@ variable "ordered_cache_behavior" {
     response_headers_policy_id   = optional(string)
     response_headers_policy_name = optional(string, "Managed-SecurityHeadersPolicy")
     target_origin_id             = optional(string)
+    use_authorizer               = optional(bool, true)
     viewer_protocol_policy       = optional(string, "redirect-to-https")
   }))
 

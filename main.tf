@@ -108,13 +108,15 @@ module "cloudfront" {
     for k, v in merge(var.default_cache_behavior, {
       target_origin_id = coalesce(var.default_cache_behavior.target_origin_id, local.s3_origin_id)
 
-      use_forwarded_values = false
+      use_forwarded_values = false # this is a legacy CloudFront feature and policies should be used instead
 
-      lambda_function_association = local.use_authorizer == false ? {} : {
-        viewer-request = {
-          lambda_arn = module.authorizer[0].lambda_qualified_arn
+      lambda_function_association = (
+        local.use_authorizer == false || var.default_cache_behavior.use_authorizer == false ? {} : {
+          viewer-request = {
+            lambda_arn = module.authorizer[0].lambda_qualified_arn
+          }
         }
-      }
+      )
     }) : k => v if v != null
   }
 
@@ -125,11 +127,13 @@ module "cloudfront" {
 
         use_forwarded_values = false # this is a legacy CloudFront feature and policies should be used instead
 
-        lambda_function_association = local.use_authorizer == false ? {} : {
-          viewer-request = {
-            lambda_arn = module.authorizer[0].lambda_qualified_arn
+        lambda_function_association = (
+          local.use_authorizer == false || var.default_cache_behavior.use_authorizer == false ? {} : {
+            viewer-request = {
+              lambda_arn = module.authorizer[0].lambda_qualified_arn
+            }
           }
-        }
+        )
       }) : k => v if v != null
     }
   ]
