@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/chatloop/terraform-aws-static-site/compare/v0.2.0...v0.2.1) (2024-10-04)
+
+
+### Bug Fixes
+
+* set s3 bucket public when using website configuration ([#6](https://github.com/chatloop/terraform-aws-static-site/issues/6)) ([6fab942](https://github.com/chatloop/terraform-aws-static-site/commit/6fab942840c19493dcdc1166b4419c78a13f1b68))
+
 ## [0.2.0](https://github.com/chatloop/terraform-aws-static-site/compare/v0.1.0...v0.2.0) (2024-10-02)
 
 
