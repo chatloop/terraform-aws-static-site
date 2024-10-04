@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/chatloop/terraform-aws-static-site/compare/v0.2.1...v0.2.2) (2024-10-04)
+
+
+### Bug Fixes
+
+* s3 policy set incorrectly when using website configuration ([#8](https://github.com/chatloop/terraform-aws-static-site/issues/8)) ([e745eb7](https://github.com/chatloop/terraform-aws-static-site/commit/e745eb71743a9b7b9246c8ce64d2cc4e8d91cb3f))
+
 ## [0.2.1](https://github.com/chatloop/terraform-aws-static-site/compare/v0.2.0...v0.2.1) (2024-10-04)
 
 
