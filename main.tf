@@ -15,7 +15,11 @@ module "s3_bucket" {
 
   bucket = coalesce(var.bucket_name, var.name)
 
-  attach_public_policy = local.use_website_endpoint == false
+  attach_public_policy    = true
+  block_public_acls       = local.use_website_endpoint == false
+  block_public_policy     = local.use_website_endpoint == false
+  ignore_public_acls      = local.use_website_endpoint == false
+  restrict_public_buckets = local.use_website_endpoint == false
 
   attach_policy = true
   policy        = data.aws_iam_policy_document.s3_policy.json
