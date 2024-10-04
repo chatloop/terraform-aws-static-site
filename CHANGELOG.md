@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/chatloop/terraform-aws-static-site/compare/v0.2.3...v0.3.0) (2024-10-04)
+
+
+### Features
+
+* allow disabling the authorizer per behavior ([#12](https://github.com/chatloop/terraform-aws-static-site/issues/12)) ([398c8e2](https://github.com/chatloop/terraform-aws-static-site/commit/398c8e2ab91fd0b48e6f8c01e610ca44087ea3cc))
+
 ## [0.2.3](https://github.com/chatloop/terraform-aws-static-site/compare/v0.2.2...v0.2.3) (2024-10-04)
 
 
