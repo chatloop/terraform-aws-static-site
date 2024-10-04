@@ -9,7 +9,7 @@ Optionally, the website can be protected with OpenID Connect.
 <!-- x-release-please-start-version -->
 ```hcl
 module "static_site" {
-  source = "github.com/chatloop/terraform-aws-static-site?ref=v0.2.2"
+  source = "github.com/chatloop/terraform-aws-static-site?ref=v0.2.3"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
