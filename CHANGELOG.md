@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/chatloop/terraform-aws-static-site/compare/v0.2.2...v0.2.3) (2024-10-04)
+
+
+### Bug Fixes
+
+* typo in s3 policy ([#10](https://github.com/chatloop/terraform-aws-static-site/issues/10)) ([deb6260](https://github.com/chatloop/terraform-aws-static-site/commit/deb6260b4a87353b260ebbaa26a42e74ac77a68b))
+
 ## [0.2.2](https://github.com/chatloop/terraform-aws-static-site/compare/v0.2.1...v0.2.2) (2024-10-04)
 
 
