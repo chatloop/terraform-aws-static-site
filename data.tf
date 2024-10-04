@@ -49,7 +49,7 @@ data "aws_iam_policy_document" "s3_policy_website_endpoint" {
 
 data "aws_iam_policy_document" "s3_policy" {
   source_policy_documents = compact([
-    try(data.aws_iam_policy_document.s3_policy_cloudfront_oac[0], null),
-    try(data.aws_iam_policy_document.s3_policy_website_endpoint[0], null),
+    try(data.aws_iam_policy_document.s3_policy_cloudfront_oac[0].json, null),
+    try(data.aws_iam_policy_document.s3_policy_website_endpoint[0].json, null),
   ])
 }
