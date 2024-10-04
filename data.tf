@@ -7,7 +7,9 @@ data "aws_route53_zone" "this" {
   name = var.route53_zone_name
 }
 
-data "aws_iam_policy_document" "s3_policy" {
+data "aws_iam_policy_document" "s3_policy_cloudfront_oac" {
+  count = local.use_website_endpoint == false ? 1 : 0
+
   statement {
     actions   = ["s3:GetObject"]
     resources = ["${module.s3_bucket.s3_bucket_arn}/*"]
@@ -17,24 +19,37 @@ data "aws_iam_policy_document" "s3_policy" {
       identifiers = ["cloudfront.amazonaws.com"]
     }
 
-    dynamic "condition" {
-      for_each = local.use_website_endpoint ? ["x"] : []
-
-      content {
-        test     = "StringEquals"
-        variable = "aws:UserAgent"
-        values   = [random_string.refer_secret[0].result]
-      }
-    }
-
-    dynamic "condition" {
-      for_each = local.use_website_endpoint == false ? ["x"] : []
-
-      content {
-        test     = "StringEquals"
-        variable = "aws:SourceArn"
-        values   = [module.cloudfront.cloudfront_distribution_arn]
-      }
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceArn"
+      values   = [module.cloudfront.cloudfront_distribution_arn]
     }
   }
+}
+
+data "aws_iam_policy_document" "s3_policy_website_endpoint" {
+  count = local.use_website_endpoint ? 1 : 0
+
+  statement {
+    actions   = ["s3:GetObject"]
+    resources = ["${module.s3_bucket.s3_bucket_arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:UserAgent"
+      values   = [random_string.refer_secret[0].result]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "s3_policy" {
+  source_policy_documents = compact([
+    try(data.aws_iam_policy_document.s3_policy_cloudfront_oac[0], null),
+    try(data.aws_iam_policy_document.s3_policy_website_endpoint[0], null),
+  ])
 }
