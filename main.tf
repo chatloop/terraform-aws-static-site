@@ -128,7 +128,7 @@ module "cloudfront" {
         use_forwarded_values = false # this is a legacy CloudFront feature and policies should be used instead
 
         lambda_function_association = (
-          local.use_authorizer == false || var.default_cache_behavior.use_authorizer == false ? {} : {
+          local.use_authorizer == false || behavior.use_authorizer == false ? {} : {
             viewer-request = {
               lambda_arn = module.authorizer[0].lambda_qualified_arn
             }
