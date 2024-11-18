@@ -1,4 +1,5 @@
 locals {
+  create_r53_records   = var.route53_zone_name != null
   s3_origin_id         = "s3"
   use_authorizer       = var.authorizer != null
   use_website_endpoint = var.website_configuration != null
@@ -61,7 +62,7 @@ module "authorizer" {
 module "cloudfront" {
   source = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=a0f0506106a4c8815c1c32596e327763acbef2c2" # v3.4.0
 
-  aliases             = [var.domain_name]
+  aliases             = concat([var.domain_name], var.aliases)
   comment             = var.comment
   default_root_object = var.default_root_object
   http_version        = "http2and3"
@@ -150,9 +151,11 @@ module "cloudfront" {
 }
 
 resource "aws_route53_record" "this" {
-  zone_id = data.aws_route53_zone.this.id
+  for_each = toset(local.create_r53_records ? concat([var.domain_name], var.aliases) : [])
 
-  name = var.domain_name
+  zone_id = data.aws_route53_zone.this[0].id
+
+  name = each.key
   type = "A"
 
   alias {

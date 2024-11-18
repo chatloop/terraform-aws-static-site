@@ -2,6 +2,11 @@ variable "acm_certificate_name" {
   type = string
 }
 
+variable "aliases" {
+  type    = list(string)
+  default = []
+}
+
 variable "authorizer" {
   type = object({
     function_name = optional(string)
@@ -94,7 +99,8 @@ variable "ordered_cache_behavior" {
 }
 
 variable "route53_zone_name" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "website_configuration" {
