@@ -66,7 +66,8 @@ module "static_site" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acm_certificate_name"></a> [acm\_certificate\_name](#input\_acm\_certificate\_name) | n/a | `string` | n/a | yes |
+| <a name="input_acm_certificate_arn"></a> [acm\_certificate\_arn](#input\_acm\_certificate\_arn) | n/a | `string` | `null` | no |
+| <a name="input_acm_certificate_name"></a> [acm\_certificate\_name](#input\_acm\_certificate\_name) | n/a | `string` | `null` | no |
 | <a name="input_authorizer"></a> [authorizer](#input\_authorizer) | n/a | <pre>object({<br/>    function_name = optional(string)<br/>    tenant        = string<br/>    client_id     = string<br/>    client_secret = string<br/>    redirect_uri  = optional(string)<br/><br/>    session_duration = optional(number)<br/><br/>    trailing_slash_redirects_enabled = optional(bool)<br/><br/>    simple_urls_enabled = optional(bool)<br/>  })</pre> | `null` | no |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | n/a | `string` | `null` | no |
 | <a name="input_comment"></a> [comment](#input\_comment) | n/a | `string` | `null` | no |

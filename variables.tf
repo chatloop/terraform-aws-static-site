@@ -1,5 +1,11 @@
+variable "acm_certificate_arn" {
+  type    = string
+  default = null
+}
+
 variable "acm_certificate_name" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "authorizer" {
