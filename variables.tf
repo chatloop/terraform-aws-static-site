@@ -99,7 +99,12 @@ variable "route53_zone_name" {
 
 variable "website_configuration" {
   type = object({
-    index_document = string
+    index_document = optional(string)
+
+    redirect_all_requests_to = optional(object({
+      host_name = string
+      protocol  = optional(string)
+    }))
   })
 
   default = null

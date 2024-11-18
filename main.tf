@@ -34,7 +34,10 @@ module "s3_bucket" {
     }
   }
 
-  website = coalesce(var.website_configuration, {})
+  website = {
+    for key, value in try(coalesce(var.website_configuration), {}) : key => value
+    if value != null
+  }
 }
 
 module "authorizer" {
