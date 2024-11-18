@@ -81,6 +81,8 @@ module "static_site" {
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_cloudfront_domain_name"></a> [cloudfront\_domain\_name](#output\_cloudfront\_domain\_name) | n/a |
 <!-- END_TF_DOCS -->
 <!-- markdownlint-restore -->
