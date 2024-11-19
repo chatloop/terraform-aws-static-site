@@ -1,6 +1,8 @@
 data "aws_acm_certificate" "this" {
-  provider = aws.us-east-1
-  domain   = var.acm_certificate_name
+  count       = var.acm_certificate_arn == null && var.acm_certificate_name != null ? 1 : 0
+  provider    = aws.us-east-1
+  domain      = var.acm_certificate_name
+  most_recent = true
 }
 
 data "aws_route53_zone" "this" {
