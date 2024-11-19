@@ -35,7 +35,10 @@ module "s3_bucket" {
     }
   }
 
-  website = coalesce(var.website_configuration, {})
+  website = {
+    for key, value in try(coalesce(var.website_configuration), {}) : key => value
+    if value != null
+  }
 }
 
 module "authorizer" {
@@ -144,7 +147,7 @@ module "cloudfront" {
   custom_error_response = length(var.custom_error_response) > 0 ? var.custom_error_response : [{}]
 
   viewer_certificate = {
-    acm_certificate_arn      = data.aws_acm_certificate.this.arn
+    acm_certificate_arn      = var.acm_certificate_arn != null ? var.acm_certificate_arn : try(data.aws_acm_certificate.this[0].arn, null)
     minimum_protocol_version = "TLSv1.2_2021"
     ssl_support_method       = "sni-only"
   }

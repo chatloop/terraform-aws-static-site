@@ -66,7 +66,8 @@ module "static_site" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acm_certificate_name"></a> [acm\_certificate\_name](#input\_acm\_certificate\_name) | n/a | `string` | n/a | yes |
+| <a name="input_acm_certificate_arn"></a> [acm\_certificate\_arn](#input\_acm\_certificate\_arn) | n/a | `string` | `null` | no |
+| <a name="input_acm_certificate_name"></a> [acm\_certificate\_name](#input\_acm\_certificate\_name) | n/a | `string` | `null` | no |
 | <a name="input_authorizer"></a> [authorizer](#input\_authorizer) | n/a | <pre>object({<br/>    function_name = optional(string)<br/>    tenant        = string<br/>    client_id     = string<br/>    client_secret = string<br/>    redirect_uri  = optional(string)<br/><br/>    session_duration = optional(number)<br/><br/>    trailing_slash_redirects_enabled = optional(bool)<br/><br/>    simple_urls_enabled = optional(bool)<br/>  })</pre> | `null` | no |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | n/a | `string` | `null` | no |
 | <a name="input_comment"></a> [comment](#input\_comment) | n/a | `string` | `null` | no |
@@ -77,7 +78,7 @@ module "static_site" {
 | <a name="input_name"></a> [name](#input\_name) | n/a | `string` | n/a | yes |
 | <a name="input_ordered_cache_behavior"></a> [ordered\_cache\_behavior](#input\_ordered\_cache\_behavior) | n/a | <pre>list(object({<br/>    allowed_methods              = optional(list(string), ["GET", "HEAD", "OPTIONS"])<br/>    cached_methods               = optional(list(string), ["GET", "HEAD", "OPTIONS"])<br/>    compress                     = optional(bool, true)<br/>    cache_policy_id              = optional(string)<br/>    cache_policy_name            = optional(string, "Managed-CachingOptimized")<br/>    origin_request_policy_id     = optional(string)<br/>    origin_request_policy_name   = optional(string, "Managed-CORS-S3Origin")<br/>    path_pattern                 = string<br/>    response_headers_policy_id   = optional(string)<br/>    response_headers_policy_name = optional(string, "Managed-SecurityHeadersPolicy")<br/>    target_origin_id             = optional(string)<br/>    use_authorizer               = optional(bool, true)<br/>    viewer_protocol_policy       = optional(string, "redirect-to-https")<br/>  }))</pre> | `[]` | no |
 | <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | n/a | `string` | `null` | no |
-| <a name="input_website_configuration"></a> [website\_configuration](#input\_website\_configuration) | n/a | <pre>object({<br/>    index_document = string<br/>  })</pre> | `null` | no |
+| <a name="input_website_configuration"></a> [website\_configuration](#input\_website\_configuration) | n/a | <pre>object({<br/>    index_document = optional(string)<br/><br/>    redirect_all_requests_to = optional(object({<br/>      host_name = string<br/>      protocol  = optional(string)<br/>    }))<br/>  })</pre> | `null` | no |
 
 ## Outputs
 
