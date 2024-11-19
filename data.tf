@@ -6,7 +6,8 @@ data "aws_acm_certificate" "this" {
 }
 
 data "aws_route53_zone" "this" {
-  name = var.route53_zone_name
+  count = local.create_r53_records ? 1 : 0
+  name  = var.route53_zone_name
 }
 
 data "aws_iam_policy_document" "s3_policy_cloudfront_oac" {
