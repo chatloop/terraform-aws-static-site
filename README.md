@@ -38,9 +38,9 @@ module "static_site" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.69.0 |
-| <a name="provider_aws.us-east-1"></a> [aws.us-east-1](#provider\_aws.us-east-1) | 5.69.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.0 |
+| <a name="provider_aws.us-east-1"></a> [aws.us-east-1](#provider\_aws.us-east-1) | ~> 5.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.0 |
 
 ## Modules
 
@@ -68,6 +68,7 @@ module "static_site" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_acm_certificate_arn"></a> [acm\_certificate\_arn](#input\_acm\_certificate\_arn) | n/a | `string` | `null` | no |
 | <a name="input_acm_certificate_name"></a> [acm\_certificate\_name](#input\_acm\_certificate\_name) | n/a | `string` | `null` | no |
+| <a name="input_aliases"></a> [aliases](#input\_aliases) | n/a | `list(string)` | `[]` | no |
 | <a name="input_authorizer"></a> [authorizer](#input\_authorizer) | n/a | <pre>object({<br/>    function_name = optional(string)<br/>    tenant        = string<br/>    client_id     = string<br/>    client_secret = string<br/>    redirect_uri  = optional(string)<br/><br/>    session_duration = optional(number)<br/><br/>    trailing_slash_redirects_enabled = optional(bool)<br/><br/>    simple_urls_enabled = optional(bool)<br/>  })</pre> | `null` | no |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | n/a | `string` | `null` | no |
 | <a name="input_comment"></a> [comment](#input\_comment) | n/a | `string` | `null` | no |

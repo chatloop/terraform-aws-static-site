@@ -1,3 +1,5 @@
+exclude: ^CHANGELOG\.md$
+
 repos:
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v9.18.0
@@ -41,7 +43,9 @@ repos:
           - --args=--framework=terraform
           - --args=--quiet
       - id: terraform_docs
-        args: [--args=--output-file=readme.md]
+        args:
+          - --args=--output-file=readme.md
+          - --args=--lockfile=false
       - id: terraform_fmt
       - id: terraform_tflint
         args: [--args=--config=__GIT_WORKING_DIR__/.tflint.hcl, --args=--call-module-type=all]
