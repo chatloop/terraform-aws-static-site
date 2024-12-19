@@ -49,6 +49,7 @@ module "static_site" {
 | <a name="module_authorizer"></a> [authorizer](#module\_authorizer) | github.com/chatloop/terraform-aws-cloudfront-auth | 695c3eb440a90e2441a006f9d091e6f73218fb0d |
 | <a name="module_cloudfront"></a> [cloudfront](#module\_cloudfront) | github.com/terraform-aws-modules/terraform-aws-cloudfront | a0f0506106a4c8815c1c32596e327763acbef2c2 |
 | <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | github.com/terraform-aws-modules/terraform-aws-s3-bucket | 8a0b697adfbc673e6135c70246cff7f8052ad95a |
+| <a name="module_website_configuration"></a> [website\_configuration](#module\_website\_configuration) | github.com/terraform-aws-modules/terraform-aws-lambda | 1d122404c2a3834ce39a7c5a319a3e754d5b0c29 |
 
 ## Resources
 
