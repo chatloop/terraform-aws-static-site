@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/chatloop/terraform-aws-static-site/compare/v1.0.0...v1.1.0) (2024-12-19)
+
+
+### Features
+
+* preserve query strings when using website configuration redirects ([#21](https://github.com/chatloop/terraform-aws-static-site/issues/21)) ([756e047](https://github.com/chatloop/terraform-aws-static-site/commit/756e047952a80c71674543a7e603f34f5ede496a))
+
 ## [1.0.0](https://github.com/chatloop/terraform-aws-static-site/compare/v0.3.0...v1.0.0) (2024-11-19)
 
 
