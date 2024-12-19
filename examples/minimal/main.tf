@@ -9,4 +9,8 @@ module "static_site" {
   domain_name          = var.domain_name
   name                 = "terraform-aws-static-site"
   route53_zone_name    = var.route53_zone_name
+
+  website_configuration = {
+    index_document = "index.html"
+  }
 }

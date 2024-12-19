@@ -62,6 +62,30 @@ module "authorizer" {
   simple_urls_enabled = coalesce(var.authorizer.simple_urls_enabled, true)
 }
 
+# This module prevents S3 from ensuring trailing slashes exists on uris
+# The S3 redirect is problematic with query strings as the redirect strips them
+module "website_configuration" {
+  source = "github.com/terraform-aws-modules/terraform-aws-lambda?ref=1d122404c2a3834ce39a7c5a319a3e754d5b0c29" # v7.8.1
+  count  = local.use_website_endpoint ? 1 : 0
+
+  providers = {
+    aws = aws.us-east-1
+  }
+
+  function_name = "${var.name}-website-configuration"
+  description   = "Website Configuration powered by Lambda@Edge"
+
+  handler = "index.handler"
+  runtime = "nodejs20.x"
+
+  lambda_at_edge = true
+
+  cloudwatch_logs_retention_in_days = 30
+  recreate_missing_package          = false
+
+  source_path = "${path.module}/src/website-configuration"
+}
+
 module "cloudfront" {
   source = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=a0f0506106a4c8815c1c32596e327763acbef2c2" # v3.4.0
 
@@ -114,13 +138,18 @@ module "cloudfront" {
 
       use_forwarded_values = false # this is a legacy CloudFront feature and policies should be used instead
 
-      lambda_function_association = (
+      lambda_function_association = (merge(
         local.use_authorizer == false || var.default_cache_behavior.use_authorizer == false ? {} : {
           viewer-request = {
             lambda_arn = module.authorizer[0].lambda_qualified_arn
           }
+        },
+        local.use_website_endpoint == false ? {} : {
+          origin-request = {
+            lambda_arn = module.website_configuration[0].lambda_function_qualified_arn
+          }
         }
-      )
+      ))
     }) : k => v if v != null
   }
 
@@ -131,13 +160,18 @@ module "cloudfront" {
 
         use_forwarded_values = false # this is a legacy CloudFront feature and policies should be used instead
 
-        lambda_function_association = (
+        lambda_function_association = (merge(
           local.use_authorizer == false || behavior.use_authorizer == false ? {} : {
             viewer-request = {
               lambda_arn = module.authorizer[0].lambda_qualified_arn
             }
+          },
+          local.use_website_endpoint == false ? {} : {
+            origin-request = {
+              lambda_arn = module.website_configuration[0].lambda_function_qualified_arn
+            }
           }
-        )
+        ))
       }) : k => v if v != null
     }
   ]
